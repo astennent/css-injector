@@ -1,0 +1,23 @@
+#injector-popup {
+	background-color:#e0e0e0;
+	width:500px;
+	transition: all 500ms cubic-bezier(.8,.21,.7,.97);
+}
+
+.rule {
+	width:100%;
+	height:200px;
+	resize:vertical;
+}
+
+#new-rule-regex {
+	width:300px;
+	height:30px;
+	padding:5px;
+}
+
+.bottom-button {
+	width:100px;
+	height:30px;
+	margin:5px;
+}
