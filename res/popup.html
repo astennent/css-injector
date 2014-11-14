@@ -5,21 +5,20 @@
 	</head>
 	<body id="injector-popup">
 
-		<h3> Matching Rules: </h3>
+		<h3>Show Unmatched Rules: <input type="checkbox" id="show-matches"/> </h3>
 
-
-		<div class="editing-rule" id="new-rule"> 
+		<div class="rule" id="new-rule"> 
 			<h3> Create New Rule: 
 				<input type="text" 
 				       id="new-rule-regex"
 				       placeholder="Enter regular expression for matching urls" />
 			</h3>
 
-			<textarea class="rule"
+			<textarea class="rule-text"
 					  placeholder="Enter custom css"
-					  id="new-rule-content"></textarea>
-			<input class="bottom-button" type="Button" value="Apply"></button> 
-			<input class="bottom-button" type="Button" value="Save"></button>
+					  id="new-rule-content"> html body { background-color:red }</textarea>
+			<input id="save-btn" class="bottom-button" type="Button" value="Save"></button>
+			<input id="test-btn" class="bottom-button" type="Button" value="Test"></button> 
 		</div>
 	</body>
 </html>
