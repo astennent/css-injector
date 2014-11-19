@@ -35,12 +35,12 @@ body {
 	background-color:white;
 }
 
-.rule {
+iframe {
 	background-color:#f0f0f0;
 	padding:10px;
 	border:1px solid #888;
 }
 
-.rule h3 {
+iframe h3 {
 	margin:5px;
 }
