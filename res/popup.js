@@ -7,24 +7,42 @@ document.addEventListener('DOMContentLoaded', function() {
 		const regexTextfield = document.getElementById("new-rule-regex");
 		const currentURL = tabs[0].url;
 		const domainRegex = /^.*\/\/.*?\//; // May not work with everything, but it's good enough.
-		const currentDomain = currentURL.match(domainRegex);
-		regexTextfield.value = currentDomain + "*"; // Asterisk to match trailing stuff.
+		const currentDomain = currentURL.match(domainRegex) + "*"; // Asterisk to match trailing stuff.
+		regexTextfield.value = currentDomain;
 
+		addRules(true, currentDomain);
+	});
 
-		function addRule(regexStr) {
+	function addRules(showNonMatches, currentDomain) {
+		function addRule(regexStr, cssString) {
 			var node = document.createElement('iframe');
 			node.src = "rule.html";
-		    node.innerHTML = regexStr;
-		    document.body.appendChild(node);
+			var injectorPopupDiv = document.getElementById("existing-rules");
+		    injectorPopupDiv.appendChild(node);
+
+   			// var ruleTextField = node.getElementsByClassName("rule-text")[0];
+		    // ruleTextField.innerHTML = cssString;
+
+		    // var ruleRegexField = node.getElementsByClassName("rule-regex")[0];
+		    // ruleRegexField.innerHTML = regexStr;
 		}
 
-		// Find existing rules and add them.
-		for (var i = 0 ; i < 3 ; i++ ) {
-			addRule("x" + i)
+		function updateNewRule(cssString) {
+			const newRuleTextfield = document.getElementById("new-rule-content");
+			newRuleTextfield.innerHTML = cssString;
 		}
 
-
-	});
+	    chrome.storage.sync.get(null, function(matchingRules) {
+	        for (regexStr in matchingRules) {
+	        	var cssString = matchingRules[regexStr];
+	        	if (regexStr == currentDomain) {
+	            	updateNewRule(cssString);
+	            } else { //TODO: If showNonMatches || this matches
+	            	addRule(regexStr, cssString);
+	            }
+	        }
+		});
+	}
 
 
 	document.getElementById("test-btn").addEventListener("click", function(){

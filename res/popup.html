@@ -4,23 +4,31 @@
 		<script type="text/javascript" src="popup.js"></script>
 	</head>
 	<body id="injector-popup">
-
-		<h3>Show Unmatched Rules: <input type="checkbox" id="show-matches"/> </h3>
+		
 
 		<div class="rule" id="new-rule"> 
 			<h3> Create New Rule: 
 				<input type="text" 
 				       id="new-rule-regex"
+				       class="rule-regex"
 				       placeholder="Enter regular expression for matching urls" />
 			</h3>
 
 			<textarea class="rule-text"
 					  placeholder="Enter custom css"
-					  id="new-rule-content">::selection {
+					  id="new-rule-content">/* Example: */
+::selection {
   background: #66E0C2;
 }</textarea>
 			<input id="save-btn" class="bottom-button" type="Button" value="Save"></button>
 			<input id="test-btn" class="bottom-button" type="Button" value="Test"></button> 
 		</div>
+
+		<h3> Existing Rules: 
+			<input type="checkbox" id="show-matches"/> 
+			<label for="show-matches"> Show Unmatched Rules</label> </h3>
+
+		<div id="existing-rules"></div>
+
 	</body>
 </html>
