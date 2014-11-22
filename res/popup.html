@@ -1,7 +1,9 @@
 <html>
 	<head>
 		<link href="popup.css" rel="stylesheet" type="text/css">
+		<link href="../prism/prism.css" rel="stylesheet" />
 		<script type="text/javascript" src="popup.js"></script>
+		<script src="../prism/prism.js"></script>
 	</head>
 	<body id="injector-popup">
 		
@@ -11,15 +13,19 @@
 				<input type="text" 
 				       id="new-rule-regex"
 				       class="rule-regex"
+				       contenteditable="true"
 				       placeholder="Enter regular expression for matching urls" />
-			</h3>
-
-			<textarea class="rule-text"
-					  placeholder="Enter custom css"
-					  id="new-rule-content">/* Example: */
+			</h3><pre class="prism-editor" 
+					  spellcheck="false"
+					  contenteditable="true"
+					  id="new-editor"
+					  ><code class="language-css"
+			            id="new-rule-content"
+			            spellcheck="false" 
+			            >/* Example: */
 ::selection {
   background: #66E0C2;
-}</textarea>
+}</code></pre>
 			<input id="save-btn" class="bottom-button" type="Button" value="Save"></button>
 			<input id="test-btn" class="bottom-button" type="Button" value="Test"></button> 
 		</div>

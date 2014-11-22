@@ -60,3 +60,17 @@ iframe:nth-child(even) {
 h3 label {
 	font-weight: normal;
 }
+
+pre.prism-editor {
+	height:200px;
+	overflow-y:scroll;
+}
+code {
+	outline:0px solid transparent;
+}
+
+pre.prism-editor::selection, 
+code::selection 
+*{
+  background: #eef !important;
+}

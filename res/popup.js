@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		function updateNewRule(cssString) {
 			const newRuleTextfield = document.getElementById("new-rule-content");
 			newRuleTextfield.innerHTML = cssString;
+			Prism.highlightAll();
 		}
 
 	    chrome.storage.sync.get(null, function(matchingRules) {
@@ -46,15 +47,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 	document.getElementById("test-btn").addEventListener("click", function(){
-		var customCSS = document.getElementById("new-rule-content").value;
-	    testStyleString(customCSS);
+		var cssStr = document.getElementById("new-editor").innerText;
+	    testStyleString(cssStr);
+	    Prism.highlightAll();
 	});
 
 	document.getElementById("save-btn").addEventListener("click", function(){
-		var customCSS = document.getElementById("new-rule-content").value;
+		var customCSS = document.getElementById("new-editor").innerText;
 		var regex = document.getElementById("new-rule-regex").value;
 	    saveStyleString(customCSS, regex);
+	    Prism.highlightAll();
 	});
+
+
+	/* Ensure that Prism syntax highlighting is always up to date. */
+	var editors = document.getElementsByClassName("prism-editor");
+
+	function onEditorKeydown() {
+		if (event.which !== 17)
+			return;
+		Prism.highlightAll();
+	}
+
+	for (var i in editors) {
+		var editor = editors[i];
+		if (editor.addEventListener) {
+			editor.addEventListener("keydown", onEditorKeydown);
+		}
+	}
 });
 
 function testStyleString(cssStr) {
@@ -68,7 +88,8 @@ function saveStyleString(cssStr, regex) {
 	// Save it using the Chrome extension storage API.
     chrome.storage.sync.set(kvp, function() {
       // Notify that we saved.
-      alert('StyleSheet saved');
+      console.log(cssStr);
+      alert('StyleSheet saved: ' + cssStr);
     });
 }
 
