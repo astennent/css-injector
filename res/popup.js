@@ -46,17 +46,15 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 
-	document.getElementById("test-btn").addEventListener("click", function(){
+	document.getElementById("apply-btn").addEventListener("click", function(){
 		var cssStr = document.getElementById("new-editor").innerText;
-	    testStyleString(cssStr);
-	    Prism.highlightAll();
+	    applyStyleString(cssStr);
 	});
 
 	document.getElementById("save-btn").addEventListener("click", function(){
 		var customCSS = document.getElementById("new-editor").innerText;
 		var regex = document.getElementById("new-rule-regex").value;
 	    saveStyleString(customCSS, regex);
-	    Prism.highlightAll();
 	});
 
 
@@ -64,8 +62,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	var editors = document.getElementsByClassName("prism-editor");
 
 	function onEditorKeydown() {
-		if (event.which !== 17)
+		// Only refresh on 'ctrl' key
+		if (event.which !== 17) {
 			return;
+		}
 		Prism.highlightAll();
 	}
 
@@ -73,11 +73,12 @@ document.addEventListener('DOMContentLoaded', function() {
 		var editor = editors[i];
 		if (editor.addEventListener) {
 			editor.addEventListener("keydown", onEditorKeydown);
+			editor.addEventListener("blur", Prism.highlightAll);
 		}
 	}
 });
 
-function testStyleString(cssStr) {
+function applyStyleString(cssStr) {
 	console.log(cssStr);
 	chrome.tabs.insertCSS( {'code':cssStr} );
 }

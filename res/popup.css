@@ -51,10 +51,10 @@ iframe:first-child{
 }
 
 iframe:nth-child(odd) {
-		background-color:#e0e0f0;
+		background-color:#eee;
 }
 iframe:nth-child(even) {
-		background-color:#f0f0f0;
+		background-color:#ddd;
 }
 
 h3 label {
