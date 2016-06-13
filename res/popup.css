@@ -1,5 +1,5 @@
 #injector-popup {
-	background-color:#ccc;
+	background-color: white;
 	width:500px;
 	transition: all 500ms cubic-bezier(.8,.21,.7,.97);
 	overflow-y:scroll;	
@@ -12,24 +12,24 @@
 }
 
 .rule-text {
-	width:100%;
-	height:200px;
-	resize:none;
+	width: 100%;
+	height: 200px;
+	resize: none;
 }
 
 #new-rule-regex {
-	width:300px;
+	width: 300px;
 }
 
 .rule-regex {
-	height:30px;
-	padding:5px;
+	height: 30px;
+	padding: 5px;
 }
 
 .bottom-button {
-	width:100px;
-	height:30px;
-	margin:5px;
+	width: 100px;
+	height: 30px;
+	margin: 8px;
 }
 
 .collapsed-rule:nth-child(odd) {
@@ -43,7 +43,7 @@ iframe {
 	border:1px solid #888;
 	border-top:0px;
 	width:100%;
-	height:120px;
+	height:136px;
 	overflow-y:auto;
 }
 iframe:first-child{
@@ -51,25 +51,53 @@ iframe:first-child{
 }
 
 iframe:nth-child(odd) {
-		background-color:#eee;
+	background-color:#eee;
 }
 iframe:nth-child(even) {
-		background-color:#ddd;
+	background-color:#ddd;
 }
 
 h3 label {
 	font-weight: normal;
+	padding-left: 10px;
 }
 
-pre.prism-editor {
-	height:200px;
+/* New Rule Editor */
+.prism-editor {
+	outline: 1px solid #999;
+}
+
+textarea {
+	outline: 1px solid #aad;
+	box-shadow: 0 0 8px #aad;
+	outline-offset: -1px;
+}
+
+pre {
+	height:220px;
+	margin: 0px !important;
 	overflow-y:scroll;
 }
+textarea {
+	resize: none;
+	padding-bottom: 5px;
+	height:244px;
+	padding: 1em;
+	width: 500px;
+	border: 0px;
+}
+pre, textarea {
+	font-size: 12px;
+	line-height: 18px;
+	background: #f7f7f4;
+}
+
 code {
 	outline:0px solid transparent;
 }
 
-pre.prism-editor::selection, 
+
+pre::selection, 
 code::selection 
 *{
   background: #eef !important;

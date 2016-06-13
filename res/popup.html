@@ -9,30 +9,22 @@
 		
 
 		<div class="rule" id="new-rule"> 
-			<h3> Create New Rule: 
+			<h3> New Rule
 				<input type="text" 
 				       id="new-rule-regex"
 				       class="rule-regex"
 				       contenteditable="true"
 				       placeholder="Enter regular expression for matching urls" />
-			</h3><pre class="prism-editor" 
-					  spellcheck="false"
-					  contenteditable="true"
-					  id="new-editor"
-					  ><code class="language-css"
-			            id="new-rule-content"
-			            spellcheck="false" 
-			            >/* Example: */
-::selection {
-  background: #66E0C2;
-}</code></pre>
+			</h3>
+			<span id="editor-container" ></span>
 			<input id="save-btn" class="bottom-button" type="Button" value="Save"></button>
 			<input id="apply-btn" class="bottom-button" type="Button" value="Apply"></button> 
 		</div>
 
-		<h3> Existing Rules: 
+		<h3> Existing Rules
+			<label for="show-matches">Show Rules for other websites:</label>
 			<input type="checkbox" id="show-matches"/> 
-			<label for="show-matches"> Show Unmatched Rules</label> </h3>
+		</h3>
 
 		<div id="existing-rules"></div>
 

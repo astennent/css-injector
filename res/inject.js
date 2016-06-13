@@ -6,7 +6,7 @@ chrome.storage.sync.get(null, function(items) {
         var regexStr = allKeys[index];
     	if (currentURL.match(regexStr) !== null) {
     		matches.push(regexStr);
-    	}
+    	} 
     }
     chrome.storage.sync.get(matches, function(matchingRules) {
         for (rule in matchingRules) {
@@ -19,7 +19,6 @@ chrome.storage.sync.get(null, function(items) {
 function applyStyleString(rule, cssStr) {
     var node = document.createElement('style');
     node.innerHTML = cssStr;
-    console.log("stop");
     node.id = "css-injector-" + rule;
     document.body.appendChild(node);
 }
