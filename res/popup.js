@@ -4,11 +4,15 @@ var showUnmatched = false;
 
 // Document On-load function
 document.addEventListener('DOMContentLoaded', function() {
+
+	var currentURL;
+
    chrome.tabs.query({'active': true}, function (tabs) {
       
       // Fill in the a default regex based on the current url.
       const regexTextfield = document.getElementById("new-rule-regex");
-      const currentURL = tabs[0].url;
+      var nonExtensionTab = tabs.filter(function(tab) { return !tab.url.startsWith("chrome-extension") })[0];
+      currentURL = nonExtensionTab.url;
       const domainRegex = /^.*\/\/.*?\//; // May not work with everything, but it's good enough.
       const currentDomain = currentURL.match(domainRegex) + "*"; // Asterisk to match trailing stuff.
       regexTextfield.value = currentDomain;
@@ -23,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
          var injectorPopupDiv = document.getElementById("existing-rules");
          injectorPopupDiv.appendChild(node);
 
-         if (document.URL.match(regexStr) === null) {
+         if (currentURL.match(regexStr) === null) {
 	      	unmatchedRuleNodes.push(node);
 	      	node.style.display = "none";
 	      }
@@ -76,8 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
    }
 
 
-   function applyStyleString() {
-      cssStr = getCurrentContent();
+   function applyStyleString(cssStr) {
       chrome.tabs.insertCSS( {'code':cssStr} );
    }
 
@@ -100,14 +103,13 @@ document.addEventListener('DOMContentLoaded', function() {
    }
 
 
-   document.getElementById("apply-btn").addEventListener("click", function(){
-       applyStyleString();
+   document.getElementById("save-btn").addEventListener("click", function(){
+		var regex = document.getElementById("new-rule-regex").value;
+		var cssStr = getCurrentContent();
+		applyStyleString(cssStr);
+		saveStyleString(regex, cssStr);
    });
 
-   document.getElementById("save-btn").addEventListener("click", function(){
-      var regex = document.getElementById("new-rule-regex").value;
-       saveStyleString(regex, getCurrentContent());
-   });
 
    var showMatchesToggle = document.getElementById('show-matches');
    showMatchesToggle.addEventListener('change', function() {
@@ -172,17 +174,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
-function clearStorage() {
-   // This might not work.
-   StorageArea.clear();
-}
-
 function setDisplayUnmatchedRules(value) {
 	var styleValue = value ? "" : "none";
 	for (var i = 0 ; i < unmatchedRuleNodes.length ; i++) {
 		unmatchedRuleNodes[i].style.display = styleValue;
-	}
-	if (!value) {
-
 	}
 }

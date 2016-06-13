@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "Inject CSS",
+  "name": "Pinject",
   "description": "Inject custom css into any webpage",
-  "version": "1.0",
+  "version": "1.0.4",
   "browser_action": {
     "default_icon": "res/icon.png",
     "default_popup": "res/popup.html"
